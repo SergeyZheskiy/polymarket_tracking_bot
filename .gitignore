@@ -1,0 +1,10 @@
+# секреты и личные данные -- только на твоей машине / сервере
+.env
+wallets.txt
+data/*
+!data/.gitkeep
+
+__pycache__/
+*.pyc
+.DS_Store
+.venv/

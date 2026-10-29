@@ -1,0 +1,3 @@
+requests>=2.31          # http
+PyYAML>=6.0             # config.yaml
+websocket-client>=1.7   # живой поток сделок

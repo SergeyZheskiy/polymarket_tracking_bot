@@ -1,0 +1,15 @@
+# Бот на сервере, с автоперезапуском:   docker compose up -d --build
+# Логи:                                  docker compose logs -f
+# Остановить:                            docker compose down
+#
+# Папка проекта примонтирована целиком: правки wallets.txt и config.yaml
+# бот видит сразу, подписчики сохраняются в data/ между перезапусками.
+
+services:
+  bot:
+    build: .
+    command: python notifier.py
+    env_file: .env
+    volumes:
+      - .:/app
+    restart: unless-stopped

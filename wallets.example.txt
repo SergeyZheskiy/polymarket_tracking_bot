@@ -1,0 +1,10 @@
+# Кошельки, за которыми следит бот. Скопируй этот файл в wallets.txt:
+#     cp wallets.example.txt wallets.txt
+#
+# По одному на строку:
+#   адрес 0x...                              0x2005d16a84ceefa912d4e380cd32e7ff827875ea
+#   или ссылка на профиль                    https://polymarket.com/@RN1
+# Всё после # -- комментарий. Бот перечитывает файл сам, перезапуск не нужен.
+
+0x2005d16a84ceefa912d4e380cd32e7ff827875ea   # RN1
+https://polymarket.com/@swisstony
