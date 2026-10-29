@@ -1,10 +1,10 @@
 <div align="center">
 
-# Polymarket Signals Bot
+# Polymarket Tracking Bot
 
 **Real-time Telegram alerts when the wallets you follow trade on [Polymarket](https://polymarket.com).**
 
-[![CI](https://github.com/SergeyZheskiy/polymarket-signals-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/SergeyZheskiy/polymarket-signals-bot/actions/workflows/ci.yml)
+[![CI](https://github.com/SergeyZheskiy/polymarket_tracking_bot/actions/workflows/ci.yml/badge.svg)](https://github.com/SergeyZheskiy/polymarket_tracking_bot/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -37,8 +37,8 @@ English · [Русский](README.ru.md)
 Requires Python 3.10+.
 
 ```bash
-git clone https://github.com/SergeyZheskiy/polymarket-signals-bot.git
-cd polymarket-signals-bot
+git clone https://github.com/SergeyZheskiy/polymarket_tracking_bot.git
+cd polymarket_tracking_bot
 pip install -r requirements.txt
 
 cp .env.example .env                  # bot token + your Telegram id
@@ -92,8 +92,8 @@ The cheapest Ubuntu VPS is enough. Docker Compose restarts the bot after
 crashes and reboots.
 
 ```bash
-git clone https://github.com/SergeyZheskiy/polymarket-signals-bot.git
-cd polymarket-signals-bot
+git clone https://github.com/SergeyZheskiy/polymarket_tracking_bot.git
+cd polymarket_tracking_bot
 cp .env.example .env && nano .env
 cp wallets.example.txt wallets.txt && nano wallets.txt
 

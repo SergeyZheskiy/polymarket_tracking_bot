@@ -29,4 +29,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build image
-        run: docker build -t polymarket-signals-bot .
+        run: docker build -t polymarket_tracking_bot .

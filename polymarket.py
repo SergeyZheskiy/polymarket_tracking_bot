@@ -32,7 +32,7 @@ class Api:
         self.retries = retries
         self.workers = workers
         self.session = requests.Session()
-        self.session.headers["User-Agent"] = "polymarket-signals-bot/1.0"
+        self.session.headers["User-Agent"] = "polymarket_tracking_bot/1.0"
 
     def get(self, url: str, params: dict | None = None) -> Any:
         last = None
