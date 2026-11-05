@@ -31,7 +31,7 @@ from pathlib import Path
 import yaml
 
 from panel import Chats, Panel, Telegram, Users
-from polymarket import DATA, GAMMA, Api, Conf, stream_trades
+from polymarket import GAMMA, Api, Conf, stream_trades
 
 ROOT = Path(__file__).resolve().parent
 ADDRESS = re.compile(r"0x[a-fA-F0-9]{40}")
@@ -165,8 +165,7 @@ def fill_market(api: Api, trade: dict) -> None:
                     pass
             return
     try:
-        history = api.get(f"{DATA}/trades", {"user": trade["proxyWallet"], "limit": 50,
-                                             "takerOnly": "false"}) or []
+        history = api.trades(trade["proxyWallet"], limit=50)
     except Exception:
         return
     for t in history:
@@ -306,8 +305,7 @@ def poll_forever(api: Api, watch: Watchlist, notifier: Notifier, every: float) -
     """Страховка к потоку: последние сделки каждого кошелька раз в every секунд."""
     def last_trades(wallet: str) -> list[dict]:
         try:
-            return api.get(f"{DATA}/trades", {"user": wallet, "limit": 20,
-                                              "takerOnly": "false"}) or []
+            return api.trades(wallet, limit=20)
         except Exception as exc:
             print(f"опрос {wallet[:10]}: {exc}")
             return []

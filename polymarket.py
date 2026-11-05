@@ -1,7 +1,7 @@
 """Клиент к публичным API Polymarket и чтение config.yaml. Ключи не нужны.
 
   gamma-api.polymarket.com        маркеты и профили
-  data-api.polymarket.com         сделки кошельков
+  data-api.polymarket.com/v2      сделки кошельков
   ws-live-data.polymarket.com     живой поток ВСЕХ сделок биржи
 """
 from __future__ import annotations
@@ -22,6 +22,14 @@ DATA = "https://data-api.polymarket.com"
 WS_LIVE = "wss://ws-live-data.polymarket.com"
 
 RETRY_ON = {408, 425, 429, 500, 502, 503, 504}
+
+# Data API v2 называет поля в snake_case, живой поток -- в camelCase.
+# Приводим v2 к виду потока, чтобы дальше код работал с одним форматом.
+V2_FIELDS = {
+    "proxy_wallet": "proxyWallet", "token_id": "asset", "condition_id": "conditionId",
+    "event_slug": "eventSlug", "outcome_index": "outcomeIndex",
+    "transaction_hash": "transactionHash",
+}
 
 
 class Api:
@@ -53,6 +61,14 @@ class Api:
             if attempt < self.retries:
                 time.sleep(min(0.5 * 2 ** (attempt - 1), 8) * random.uniform(0.7, 1.3))
         raise RuntimeError(f"{url} не ответил после {self.retries} попыток: {last}")
+
+    def trades(self, user: str, limit: int = 20) -> list[dict]:
+        """Последние сделки кошелька, новые первыми, включая исполненные лимитки."""
+        payload = self.get(f"{DATA}/v2/trades", {
+            "user": user, "limit": limit, "taker_only": "false",
+        }) or {}
+        return [{V2_FIELDS.get(k, k): v for k, v in row.items()}
+                for row in payload.get("data") or []]
 
     def many(self, func: Callable, items: list) -> list:
         """Параллельно применяет func к каждому элементу. Порядок сохраняется."""

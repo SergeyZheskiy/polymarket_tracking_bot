@@ -4,6 +4,7 @@
 #
 # Папка проекта примонтирована целиком: правки wallets.txt и config.yaml
 # бот видит сразу, подписчики сохраняются в data/ между перезапусками.
+# Часовой пояс берётся с сервера: timedatectl set-timezone Europe/Moscow
 
 services:
   bot:
@@ -12,4 +13,8 @@ services:
     env_file: .env
     volumes:
       - .:/app
+      - /etc/localtime:/etc/localtime:ro      # время в сигналах -- как на сервере
     restart: unless-stopped
+    logging:                                  # логи не больше 3 x 10 МБ
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
